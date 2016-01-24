@@ -1,5 +1,5 @@
-// i18next, v1.11.2
-// Copyright (c)2015 Jan Mühlemann (jamuhl).
+// i18next, v1.11.4
+// Copyright (c)2016 Jan Mühlemann (jamuhl).
 // Distributed under MIT license
 // http://i18next.com
 (function (root, factory) {
@@ -1699,12 +1699,12 @@
             delete optionWithoutCount.count;
             optionWithoutCount._origLng = optionWithoutCount._origLng || optionWithoutCount.lng || lngs[0];
             delete optionWithoutCount.lng;
-            optionWithoutCount.defaultValue = o.pluralNotFound;
     
             var pluralKey;
             if (!pluralExtensions.needsPlural(lngs[0], options.count)) {
                 pluralKey = ns + nsseparator + key;
             } else {
+                optionWithoutCount.defaultValue = o.pluralNotFound;
                 pluralKey = ns + nsseparator + key + o.pluralSuffix;
                 var pluralExtension = pluralExtensions.get(lngs[0], options.count);
                 if (pluralExtension >= 0) {
@@ -1734,6 +1734,7 @@
                 if (translated != o.pluralNotFound) return translated;
             } else {
                 optionWithoutCount.lng = optionWithoutCount._origLng;
+                optionWithoutCount.defaultValue = optionWithoutCount.defaultPluralValue || o.pluralNotFound;
                 delete optionWithoutCount._origLng;
                 translated = translate(ns + nsseparator + key, optionWithoutCount);
     
